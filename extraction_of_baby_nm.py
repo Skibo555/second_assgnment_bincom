@@ -11,6 +11,20 @@ def find_num(s):
     else:
         return False
 
+
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return - 1
+
+
 # I used open here because I don't want to be bothered about closing the file at the end of the operation.
 with open("baby2008.html") as name_file:
     # This reads the content of the file.
@@ -38,3 +52,10 @@ with open("baby2008.html") as name_file:
             female_name.append(names[i])
     print(f'Male Name: {male_name}')
     print(f'Female Name: {female_name}')
+
+    sorted_names = sorted(names)
+
+    user_input = input("Enter the name you want to search for:\n").title()
+    result = binary_search(sorted_names, user_input)
+
+    print(f'Name found at position: {result}' if result != -1 else 'Name Not Found')
